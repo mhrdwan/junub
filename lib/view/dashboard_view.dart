@@ -92,7 +92,6 @@ class _DashboardViewState extends State<DashboardView> {
     }
     return containerList;
   }
-  // Membuat list widget menggunakan for loop
 
   @override
   Widget build(BuildContext context) {
