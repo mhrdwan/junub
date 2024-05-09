@@ -1,129 +1,81 @@
-class detailSuratModel {
-  int code;
-  String message;
-  Data data;
+class DetailSurahResponse {
+  String? message;
+  int? code;
+  SurahDetail? data;
 
-  detailSuratModel({
-    required this.code,
-    required this.message,
-    required this.data,
-  });
+  DetailSurahResponse({this.message, this.code, this.data});
 
-  factory detailSuratModel.fromJson(Map<String, dynamic> json) {
-    return detailSuratModel(
-      code: json['code'] ?? 0,
-      message: json['message'] ?? '',
-      data: Data.fromJson(json['data'] ?? {}),
+  factory DetailSurahResponse.fromJson(Map<String, dynamic> json) {
+    return DetailSurahResponse(
+      message: json['message'],
+      code: json['code'],
+      data: json['data'] != null ? SurahDetail.fromJson(json['data']) : null,
     );
   }
 }
 
-class Data {
-  int nomor;
-  String nama;
-  String namaLatin;
-  int jumlahAyat;
-  String tempatTurun;
-  String arti;
-  String deskripsi;
-  Map<String, String> audioFull;
-  List<Ayat> ayat;
-  SuratSelanjutnya suratSelanjutnya;
-  bool suratSebelumnya;
+class SurahDetail {
+  int? nomor;
+  String? nama;
+  String? namaLatin;
+  int? jumlahAyat;
+  String? tempatTurun;
+  String? arti;
+  String? deskripsi;
+  Map<String, String>? audioFull;
+  List<AyatDetail>? ayat;
 
-  Data({
-    required this.nomor,
-    required this.nama,
-    required this.namaLatin,
-    required this.jumlahAyat,
-    required this.tempatTurun,
-    required this.arti,
-    required this.deskripsi,
-    required this.audioFull,
-    required this.ayat,
-    required this.suratSelanjutnya,
-    required this.suratSebelumnya,
+  SurahDetail({
+    this.nomor,
+    this.nama,
+    this.namaLatin,
+    this.jumlahAyat,
+    this.tempatTurun,
+    this.arti,
+    this.deskripsi,
+    this.audioFull,
+    this.ayat,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) {
-    return Data(
-      nomor: json['nomor'] ?? 0,
-      nama: json['nama'] ?? '',
-      namaLatin: json['nama_latin'] ?? '',
-      jumlahAyat: json['jumlah_ayat'] ?? 0,
-      tempatTurun: json['tempat_turun'] ?? '',
-      arti: json['arti'] ?? '',
-      deskripsi: json['deskripsi'] ?? '',
-      audioFull: json['audio_full'] != null
-          ? Map<String, String>.from(json['audio_full'])
-          : {},
-      ayat: json['ayat'] != null
-          ? List<Ayat>.from(json['ayat'].map((x) => Ayat.fromJson(x)))
-          : [],
-      suratSelanjutnya: json['surat_selanjutnya'] != null
-          ? SuratSelanjutnya.fromJson(json['surat_selanjutnya'])
-          : SuratSelanjutnya.empty(),
-      suratSebelumnya: json['surat_sebelumnya'] ?? false,
+  factory SurahDetail.fromJson(Map<String, dynamic> json) {
+    return SurahDetail(
+      nomor: json['nomor'],
+      nama: json['nama'],
+      namaLatin: json['namaLatin'],
+      jumlahAyat: json['jumlahAyat'],
+      tempatTurun: json['tempatTurun'],
+      arti: json['arti'],
+      deskripsi: json['deskripsi'],
+      audioFull: json['audioFull']?.cast<String, String>(),
+      ayat: json['ayat']
+          ?.map<AyatDetail>((item) => AyatDetail.fromJson(item))
+          .toList(),
     );
   }
 }
 
-class Ayat {
-  int nomorAyat;
-  String teksArab;
-  String teksLatin;
-  String teksIndonesia;
-  Map<String, String> audio;
+class AyatDetail {
+  int? nomorAyat;
+  String? teksArab;
+  String? teksLatin;
+  String? teksIndonesia;
+  Map<String, String>? audio;
 
-  Ayat({
-    required this.nomorAyat,
-    required this.teksArab,
-    required this.teksLatin,
-    required this.teksIndonesia,
-    required this.audio,
+  AyatDetail({
+    this.nomorAyat,
+    this.teksArab,
+    this.teksLatin,
+    this.teksIndonesia,
+    this.audio,
   });
 
-  factory Ayat.fromJson(Map<String, dynamic> json) {
-    return Ayat(
-      nomorAyat: json['nomor_ayat'] ?? 0,
-      teksArab: json['teks_arab'] ?? '',
-      teksLatin: json['teks_latin'] ?? '',
-      teksIndonesia: json['teks_indonesia'] ?? '',
-      audio:
-          json['audio'] != null ? Map<String, String>.from(json['audio']) : {},
-    );
-  }
-}
-
-class SuratSelanjutnya {
-  int nomor;
-  String nama;
-  String namaLatin;
-  int jumlahAyat;
-
-  SuratSelanjutnya({
-    required this.nomor,
-    required this.nama,
-    required this.namaLatin,
-    required this.jumlahAyat,
-  });
-
-  factory SuratSelanjutnya.fromJson(Map<String, dynamic> json) {
-    return SuratSelanjutnya(
-      nomor: json['nomor'] ?? 0,
-      nama: json['nama'] ?? '',
-      namaLatin: json['nama_latin'] ?? '',
-      jumlahAyat: json['jumlah_ayat'] ?? 0,
-    );
-  }
-
-  // An empty constructor for cases when the JSON is missing
-  factory SuratSelanjutnya.empty() {
-    return SuratSelanjutnya(
-      nomor: 0,
-      nama: '',
-      namaLatin: '',
-      jumlahAyat: 0,
+  factory AyatDetail.fromJson(Map<String, dynamic> json) {
+    return AyatDetail(
+      nomorAyat: json['nomorAyat'],
+      teksArab: json['teksArab'],
+      teksLatin: json['teksLatin'],
+      teksIndonesia: json['teksIndonesia'],
+      audio: json['audio']?.cast<String, String>(),
     );
   }
 }
