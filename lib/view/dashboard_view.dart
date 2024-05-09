@@ -85,6 +85,17 @@ class _DashboardViewState extends State<DashboardView> {
               ),
               width: MediaQuery.of(context).size.width / 1.2,
               height: MediaQuery.of(context).size.height / 8,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('data'),
+                    Text('data'),
+                    Text('data'),
+                  ],
+                ),
+              ),
             ),
           ),
         ),
@@ -140,7 +151,6 @@ class _DashboardViewState extends State<DashboardView> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: const Center(
-                            // Menggunakan Center untuk menempatkan ikon di tengah
                             child: Icon(
                               Icons.mosque, // Contoh menggunakan ikon bintang
                               color: Colors.white, // Warna ikon
@@ -164,7 +174,7 @@ class _DashboardViewState extends State<DashboardView> {
               child: Text(
                 'Tugas Kamu',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
               ),
