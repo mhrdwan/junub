@@ -70,10 +70,8 @@ class _DashboardViewState extends State<DashboardView> {
         );
     }
   }
-  // Membuat list widget menggunakan for loop
 
-  @override
-  Widget build(BuildContext context) {
+  List<Widget> createContainerList(BuildContext context) {
     List<Widget> containerList = [];
     for (int i = 0; i < 5; i++) {
       containerList.add(
@@ -92,6 +90,12 @@ class _DashboardViewState extends State<DashboardView> {
         ),
       );
     }
+    return containerList;
+  }
+  // Membuat list widget menggunakan for loop
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -157,7 +161,7 @@ class _DashboardViewState extends State<DashboardView> {
               ),
             ),
             // Generate 4 Containers with loop
-            ...containerList,
+            ...createContainerList(context),
           ],
         ),
       ),
