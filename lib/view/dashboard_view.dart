@@ -20,21 +20,21 @@ class _DashboardViewState extends State<DashboardView> {
   @override
   void initState() {
     super.initState();
-    getData();
+    // getData();
   }
 
-  void getData() async {
-    try {
-      var response = await Dio().get('https://fakestoreapi.com/products');
-      print(response);
-      setState(() {
-        listJson = response.data;
-        isLoading = false;
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
+  // void getData() async {
+  //   try {
+  //     var response = await Dio().get('https://fakestoreapi.com/products');
+  //     print(response);
+  //     setState(() {
+  //       listJson = response.data;
+  //       isLoading = false;
+  //     });
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   void onBoxTap(int index) {
     switch (index) {

@@ -10,7 +10,12 @@ class Menu2 extends StatefulWidget {
 class _Menu2State extends State<Menu2> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Halaman Menu 2",
+        ),
+      ),
       body: Center(
         child: Center(
           child: Text('Menu 2'),

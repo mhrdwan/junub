@@ -19,7 +19,7 @@ class _Menu1State extends State<Menu1> {
       ),
       body: Center(
         child: Center(
-          child: Text('Menu 2'),
+          child: Text('Menu 1'),
         ),
       ),
     );
