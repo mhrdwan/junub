@@ -70,9 +70,28 @@ class _DashboardViewState extends State<DashboardView> {
         );
     }
   }
+  // Membuat list widget menggunakan for loop
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> containerList = [];
+    for (int i = 0; i < 5; i++) {
+      containerList.add(
+        Padding(
+          padding: const EdgeInsets.only(top: 15),
+          child: Center(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.blue[300],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              width: MediaQuery.of(context).size.width / 1.2,
+              height: MediaQuery.of(context).size.height / 8,
+            ),
+          ),
+        ),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -137,6 +156,8 @@ class _DashboardViewState extends State<DashboardView> {
                 ),
               ),
             ),
+            // Generate 4 Containers with loop
+            ...containerList,
           ],
         ),
       ),
