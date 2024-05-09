@@ -1,8 +1,7 @@
-import 'dart:ui';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:junub/constants.dart';
 import 'package:junub/view/menu1.dart';
 import 'package:junub/view/menu2.dart';
 
@@ -73,20 +72,20 @@ class _DashboardViewState extends State<DashboardView> {
 
   List<Widget> createContainerList(BuildContext context) {
     List<Widget> containerList = [];
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 3; i++) {
       containerList.add(
         Padding(
           padding: const EdgeInsets.only(top: 15),
           child: Center(
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.blue[300],
+                color: Colors.green[600],
                 borderRadius: BorderRadius.circular(20),
               ),
               width: MediaQuery.of(context).size.width / 1.2,
               height: MediaQuery.of(context).size.height / 8,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15),
+              child: const Padding(
+                padding: EdgeInsets.only(left: 15, right: 15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
