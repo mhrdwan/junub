@@ -95,13 +95,17 @@ class _DashboardViewState extends State<DashboardView> {
                 width: MediaQuery.of(context).size.width / 1.2,
                 height: MediaQuery.of(context).size.height / 6,
               ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  for (int i = 0; i < 4; i++)
-                    GestureDetector(
-                      onTap: () => onBoxTap(i),
+              SizedBox(height: 30),
+              // Grid view of menu items
+              Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                child: GridView.count(
+                  crossAxisCount: 4,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  children: List.generate(8, (index) {
+                    return GestureDetector(
+                      onTap: () => onBoxTap(index),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -114,11 +118,12 @@ class _DashboardViewState extends State<DashboardView> {
                             ),
                           ),
                           SizedBox(height: 8),
-                          Text("Menu ${i + 1}"),
+                          Text(index == 0 ? "Al-Qur'an" : "Menu ${index + 1}"),
                         ],
                       ),
-                    ),
-                ],
+                    );
+                  }),
+                ),
               ),
               SizedBox(height: 20),
             ],
