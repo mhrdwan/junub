@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:junub/models/surah_quran.dart';
+import 'package:junub/view/Al-Quran/detail-surah.dart';
 
 class Menu1 extends StatefulWidget {
   const Menu1({super.key});
@@ -12,8 +12,7 @@ class Menu1 extends StatefulWidget {
 
 class _Menu1State extends State<Menu1> {
   List<Surah> listSurah = [];
-  bool loading =
-      true; // Inisialisasi dengan true untuk menunjukkan loading di awal
+  bool loading = true;
 
   void getDataSurah() async {
     try {
@@ -48,6 +47,16 @@ class _Menu1State extends State<Menu1> {
                   title: Text(listSurah[index].nama),
                   subtitle: Text(listSurah[index].namaLatin),
                   trailing: Text("Jumlah: ${listSurah[index].jumlahAyat}"),
+                  onTap: () {
+                    print("Ini adalah surah nomor ${listSurah[index].nomor}");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            DetailSurah(surah: listSurah[index]),
+                      ),
+                    );
+                  },
                 );
               },
             )

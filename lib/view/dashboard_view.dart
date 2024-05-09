@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:junub/constants.dart';
-import 'package:junub/view/menu1.dart';
+import 'package:junub/view/Al-Quran/menu1.dart';
 import 'package:junub/view/menu2.dart';
 
 class DashboardView extends StatefulWidget {
@@ -89,9 +89,9 @@ class _DashboardViewState extends State<DashboardView> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('data'),
-                    Text('data'),
-                    Text('data'),
+                    // Text('data'),
+                    // Text('data'),
+                    // Text('data'),
                   ],
                 ),
               ),
