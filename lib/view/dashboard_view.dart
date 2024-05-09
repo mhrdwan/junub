@@ -139,6 +139,14 @@ class _DashboardViewState extends State<DashboardView> {
                             color: Colors.green,
                             borderRadius: BorderRadius.circular(10),
                           ),
+                          child: const Center(
+                            // Menggunakan Center untuk menempatkan ikon di tengah
+                            child: Icon(
+                              Icons.mosque, // Contoh menggunakan ikon bintang
+                              color: Colors.white, // Warna ikon
+                              size: 24, // Ukuran ikon
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 8),
                         Text(index == 0
