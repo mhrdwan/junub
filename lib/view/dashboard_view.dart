@@ -99,7 +99,7 @@ class _DashboardViewState extends State<DashboardView> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          "Rabu , 5-8-2024",
+          "ini hari tanggal bulan tahun",
           style: TextStyle(color: Colors.black, fontSize: 15),
         ),
       ),
