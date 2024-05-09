@@ -141,7 +141,9 @@ class _DashboardViewState extends State<DashboardView> {
                           ),
                         ),
                         const SizedBox(height: 8),
-                        Text(index == 0 ? "Al-Qur'an" : "Menu ${index + 1}"),
+                        Text(index == 0
+                            ? "Al-Qur'an"
+                            : (index == 1 ? "Do'a-Do'a" : "Menu ${index + 1}")),
                       ],
                     ),
                   );
