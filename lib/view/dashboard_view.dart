@@ -159,7 +159,6 @@ class _DashboardViewState extends State<DashboardView> {
                 ),
               ),
             ),
-            // Generate 4 Containers with loop
             ...createContainerList(context),
           ],
         ),
