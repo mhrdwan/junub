@@ -46,7 +46,7 @@ class _Menu1State extends State<Menu1> {
                 return ListTile(
                   title: Text(listSurah[index].nama),
                   subtitle: Text(listSurah[index].namaLatin),
-                  trailing: Text("Jumlah: ${listSurah[index].jumlahAyat}"),
+                  trailing: Text("Jumla: ${listSurah[index].jumlahAyat}"),
                   onTap: () {
                     print("Ini adalah surah nomor ${listSurah[index].nomor}");
                     Navigator.push(
