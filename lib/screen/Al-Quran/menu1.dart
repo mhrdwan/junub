@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:junub/models/surah_quran.dart';
-import 'package:junub/view/Al-Quran/detail-surah.dart';
+import 'package:junub/screen/Al-Quran/detail-surah.dart';
 
 class Menu1 extends StatefulWidget {
   const Menu1({super.key});

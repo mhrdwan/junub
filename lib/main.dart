@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:junub/view/dashboard_view.dart';
+import 'package:junub/screen/dashboard_view.dart';
 
 void main() {
   runApp(const MyApp());
