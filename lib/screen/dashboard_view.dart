@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:junub/constants.dart';
-import 'package:junub/view/Al-Quran/menu1.dart';
-import 'package:junub/view/menu2.dart';
+import 'package:junub/screen/Al-Quran/menu1.dart';
+import 'package:junub/screen/menu2.dart';
 
 class DashboardView extends StatefulWidget {
   const DashboardView({Key? key}) : super(key: key);
@@ -160,7 +160,7 @@ class _DashboardViewState extends State<DashboardView> {
                         const SizedBox(height: 8),
                         Text(index == 0
                             ? "Al-Qur'an"
-                            : (index == 1 ? "Do'a-Do'a" : "Menu ${index + 1}")),
+                            : (index == 1 ? "Do'a-Doa" : "Menu ${index + 1}")),
                       ],
                     ),
                   );
