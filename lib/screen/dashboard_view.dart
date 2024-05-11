@@ -1,8 +1,6 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:junub/constants.dart';
 import 'package:junub/screen/Al-Quran/menu1.dart';
+import 'package:junub/screen/hadist/hadist_screen.dart';
 import 'package:junub/screen/menu2.dart';
 
 class DashboardView extends StatefulWidget {
@@ -47,6 +45,12 @@ class _DashboardViewState extends State<DashboardView> {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const Menu2()),
+        );
+        break;
+      case 2:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const HadistScreen()),
         );
         break;
       default:
@@ -160,7 +164,11 @@ class _DashboardViewState extends State<DashboardView> {
                         const SizedBox(height: 8),
                         Text(index == 0
                             ? "Al-Qur'an"
-                            : (index == 1 ? "Do'a-Doa" : "Menu ${index + 1}")),
+                            : (index == 1
+                                ? "Do'a-Doa"
+                                : (index == 2
+                                    ? "Hadis't"
+                                    : "Menu ${index + 1}"))),
                       ],
                     ),
                   );
