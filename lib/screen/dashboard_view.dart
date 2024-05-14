@@ -232,17 +232,52 @@ class _DashboardViewState extends State<DashboardView> {
                                 width: 50,
                                 height: 50,
                                 decoration: BoxDecoration(
-                                  color: Colors.green,
+                                  color: Colors.white,
                                   borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      spreadRadius: 1,
+                                      blurRadius: 2,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ],
                                 ),
-                                child: const Center(
-                                  child: Icon(
-                                    Icons
-                                        .mosque, // Contoh menggunakan ikon bintang
-                                    color: Colors.white, // Warna ikon
-                                    size: 24, // Ukuran ikon
-                                  ),
-                                ),
+                                child: Center(
+                                    child: index == 0
+                                        ? Image.asset(
+                                            'assets/icons/alquran.png',
+                                            fit: BoxFit.cover,
+                                          )
+                                        : (index == 1
+                                            ? Image.asset(
+                                                'assets/icons/tanganDoa.jpg',
+                                                fit: BoxFit.cover,
+                                              )
+                                            : (index == 3
+                                                ? Image.asset(
+                                                    'assets/icons/sejadah.jpg',
+                                                    scale: 0.1,
+                                                    fit: BoxFit.cover,
+                                                  )
+                                                : (index == 4
+                                                    ? Image.asset(
+                                                        'assets/icons/allah.jpg',
+                                                        scale: 0.1,
+                                                        fit: BoxFit.cover)
+                                                    : (index == 2
+                                                        ? Image.asset(
+                                                            'assets/icons/hadist.jpg',
+                                                            scale: 0.1,
+                                                            fit: BoxFit.cover)
+                                                        : const Icon(
+                                                            Icons
+                                                                .mosque, // Contoh menggunakan ikon bintang
+                                                            color: Colors
+                                                                .white, // Warna ikon
+                                                            size:
+                                                                24, // Ukuran ikon
+                                                          )))))),
                               ),
                               const SizedBox(height: 8),
                               Text(index == 0
