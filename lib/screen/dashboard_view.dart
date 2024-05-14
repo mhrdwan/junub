@@ -1,5 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:junub/api/JadwalSholat/getJadwalSholatHarian.dart';
+import 'package:junub/models/JadwalSholat/ListSemuaKota/ListSholatHarian.dart';
 import 'package:junub/screen/Al-Quran/menu1.dart';
+import 'package:junub/screen/Asmaul-Husna/asmaulHusna_screen.dart';
+import 'package:junub/screen/Waktu-Sholat/waktu_sholat_screen.dart';
 import 'package:junub/screen/hadist/hadist_screen.dart';
 import 'package:junub/screen/menu2.dart';
 
@@ -10,13 +16,24 @@ class DashboardView extends StatefulWidget {
   State<DashboardView> createState() => _DashboardViewState();
 }
 
+ListSholatHarian? listSholatHarian;
+
 class _DashboardViewState extends State<DashboardView> {
   List<dynamic> listJson = [];
   bool isLoading = true;
+  void fetchSholatData() async {
+    var data = await getSholat();
+    print(data);
+    setState(() {
+      listSholatHarian = ListSholatHarian.fromJson(data);
+      isLoading = false;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
+    fetchSholatData();
     // getData();
   }
 
@@ -51,6 +68,18 @@ class _DashboardViewState extends State<DashboardView> {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const HadistScreen()),
+        );
+        break;
+      case 3:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const WaktuSholat()),
+        );
+        break;
+      case 4:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const AsmaulHusnaScreen()),
         );
         break;
       default:
@@ -117,79 +146,131 @@ class _DashboardViewState extends State<DashboardView> {
           style: TextStyle(color: Colors.black, fontSize: 15),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 20),
-            Center(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.blue[900],
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                width: MediaQuery.of(context).size.width / 1.2,
-                height: MediaQuery.of(context).size.height / 6,
-              ),
-            ),
-            const SizedBox(height: 30),
-            // Grid view of menu items
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: GridView.count(
-                crossAxisCount: 4,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                children: List.generate(8, (index) {
-                  return GestureDetector(
-                    onTap: () => onBoxTap(index),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Center(
-                            child: Icon(
-                              Icons.mosque, // Contoh menggunakan ikon bintang
-                              color: Colors.white, // Warna ikon
-                              size: 24, // Ukuran ikon
+      body: isLoading
+          ? Center(child: CircularProgressIndicator())
+          : SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 20),
+                  Center(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      width: MediaQuery.of(context).size.width / 1.2,
+                      height: MediaQuery.of(context).size.height / 6,
+                      child: Stack(
+                        children: [
+                          Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                    child: const Text(
+                                  "Dzuhur",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                                Text(
+                                  "${listSholatHarian?.jadwal?.dzuhur ?? ""}",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 30),
+                                ),
+                                // SizedBox(
+                                //   height: 8,
+                                // ),
+
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(Icons.location_on),
+                                    const SizedBox(width: 8.0),
+                                    Text(
+                                      "${listSholatHarian?.daerah.toString() ?? "loading"}, ${listSholatHarian?.lokasi.toString() ?? "loading"}",
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(index == 0
-                            ? "Al-Qur'an"
-                            : (index == 1
-                                ? "Do'a-Doa"
-                                : (index == 2
-                                    ? "Hadis't"
-                                    : "Menu ${index + 1}"))),
-                      ],
+                        ],
+                      ),
                     ),
-                  );
-                }),
+                  ),
+
+                  const SizedBox(height: 30),
+                  // Grid view of menu items
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    child: GridView.count(
+                      crossAxisCount: 4,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: List.generate(8, (index) {
+                        return GestureDetector(
+                          onTap: () => onBoxTap(index),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: const Center(
+                                  child: Icon(
+                                    Icons
+                                        .mosque, // Contoh menggunakan ikon bintang
+                                    color: Colors.white, // Warna ikon
+                                    size: 24, // Ukuran ikon
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(index == 0
+                                  ? "Al-Qur'an"
+                                  : (index == 1
+                                      ? "Do'a-Doa"
+                                      : (index == 2
+                                          ? "Hadis't"
+                                          : (index == 3
+                                              ? "Waktu Sholat"
+                                              : (index == 4
+                                                  ? "Asmaul"
+                                                  : "Menu ${index + 1}"))))),
+                            ],
+                          ),
+                        );
+                      }),
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 40),
+                    child: Text(
+                      'Tugas Kamu',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  ...createContainerList(context),
+                ],
               ),
             ),
-            const SizedBox(height: 40),
-            const Padding(
-              padding: EdgeInsets.only(left: 40),
-              child: Text(
-                'Tugas Kamu',
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            ...createContainerList(context),
-          ],
-        ),
-      ),
     );
   }
 }
