@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:junub/api/JadwalSholat/getJadwalSholatHarian.dart';
+import 'package:junub/components/footerMenu.dart';
 import 'package:junub/models/JadwalSholat/ListSemuaKota/ListSholatHarian.dart';
 import 'package:junub/screen/Al-Quran/menu1.dart';
 import 'package:junub/screen/Asmaul-Husna/asmaulHusna_screen.dart';
@@ -56,7 +57,13 @@ class _DashboardViewState extends State<DashboardView> {
   //   }
   // }
 
-  void onBoxTap(int index) {
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    // Handle navigation based on index
     switch (index) {
       case 0:
         Navigator.push(
@@ -249,7 +256,7 @@ class _DashboardViewState extends State<DashboardView> {
                     ),
                   ),
 
-                  const SizedBox(height: 10),
+                  // SizedBox(height: MediaQuery.of(context).size.height / 120),
                   // Grid view of menu items
                   Padding(
                     padding: const EdgeInsets.only(left: 20, right: 20),
@@ -259,13 +266,13 @@ class _DashboardViewState extends State<DashboardView> {
                       physics: const NeverScrollableScrollPhysics(),
                       children: List.generate(8, (index) {
                         return GestureDetector(
-                          onTap: () => onBoxTap(index),
+                          onTap: () => _onItemTapped(index),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Container(
-                                width: 50,
-                                height: 50,
+                                width: MediaQuery.of(context).size.width / 8,
+                                height: MediaQuery.of(context).size.height / 17,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(10),
@@ -332,7 +339,7 @@ class _DashboardViewState extends State<DashboardView> {
                       }),
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 10),
                   const Padding(
                     padding: EdgeInsets.only(left: 40),
                     child: Text(
@@ -347,6 +354,8 @@ class _DashboardViewState extends State<DashboardView> {
                 ],
               ),
             ),
+
+      bottomNavigationBar: FooterMenu(onTap: _onItemTapped),
     );
   }
 }
