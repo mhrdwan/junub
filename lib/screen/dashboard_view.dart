@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:junub/api/JadwalSholat/getJadwalSholatHarian.dart';
 import 'package:junub/models/JadwalSholat/ListSemuaKota/ListSholatHarian.dart';
 import 'package:junub/screen/Al-Quran/menu1.dart';
@@ -19,6 +18,11 @@ class DashboardView extends StatefulWidget {
 ListSholatHarian? listSholatHarian;
 
 class _DashboardViewState extends State<DashboardView> {
+  String getFormattedDate() {
+    DateTime now = DateTime.now();
+    return DateFormat('EEEE, dd MMMM yyyy  ').format(now);
+  }
+
   List<dynamic> listJson = [];
   bool isLoading = true;
   void fetchSholatData() async {
@@ -141,13 +145,14 @@ class _DashboardViewState extends State<DashboardView> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
-          "ini hari tanggal bulan tahun",
-          style: TextStyle(color: Colors.black, fontSize: 15),
+        title: Text(
+          listSholatHarian?.jadwal.tanggal ?? "",
+          style: const TextStyle(
+              color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500),
         ),
       ),
       body: isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,18 +173,19 @@ class _DashboardViewState extends State<DashboardView> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Container(
-                                    child: const Text(
+                                const Text(
                                   "Dzuhur",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold),
-                                )),
+                                ),
                                 Text(
-                                  "${listSholatHarian?.jadwal?.dzuhur ?? ""}",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 30),
+                                  listSholatHarian?.jadwal.dzuhur ?? "",
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold),
                                 ),
                                 // SizedBox(
                                 //   height: 8,
@@ -226,17 +232,52 @@ class _DashboardViewState extends State<DashboardView> {
                                 width: 50,
                                 height: 50,
                                 decoration: BoxDecoration(
-                                  color: Colors.green,
+                                  color: Colors.white,
                                   borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.2),
+                                      spreadRadius: 1,
+                                      blurRadius: 2,
+                                      offset: Offset(0, 2),
+                                    ),
+                                  ],
                                 ),
-                                child: const Center(
-                                  child: Icon(
-                                    Icons
-                                        .mosque, // Contoh menggunakan ikon bintang
-                                    color: Colors.white, // Warna ikon
-                                    size: 24, // Ukuran ikon
-                                  ),
-                                ),
+                                child: Center(
+                                    child: index == 0
+                                        ? Image.asset(
+                                            'assets/icons/alquran.png',
+                                            fit: BoxFit.cover,
+                                          )
+                                        : (index == 1
+                                            ? Image.asset(
+                                                'assets/icons/tanganDoa.jpg',
+                                                fit: BoxFit.cover,
+                                              )
+                                            : (index == 3
+                                                ? Image.asset(
+                                                    'assets/icons/sejadah.jpg',
+                                                    scale: 0.1,
+                                                    fit: BoxFit.cover,
+                                                  )
+                                                : (index == 4
+                                                    ? Image.asset(
+                                                        'assets/icons/allah.jpg',
+                                                        scale: 0.1,
+                                                        fit: BoxFit.cover)
+                                                    : (index == 2
+                                                        ? Image.asset(
+                                                            'assets/icons/hadist.jpg',
+                                                            scale: 0.1,
+                                                            fit: BoxFit.cover)
+                                                        : const Icon(
+                                                            Icons
+                                                                .mosque, // Contoh menggunakan ikon bintang
+                                                            color: Colors
+                                                                .white, // Warna ikon
+                                                            size:
+                                                                24, // Ukuran ikon
+                                                          )))))),
                               ),
                               const SizedBox(height: 8),
                               Text(index == 0
