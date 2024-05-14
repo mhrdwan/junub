@@ -20,7 +20,7 @@ ListSholatHarian? listSholatHarian;
 class _DashboardViewState extends State<DashboardView> {
   String getFormattedDate() {
     DateTime now = DateTime.now();
-    return DateFormat('EEEE, dd MMMM yyyy || hh:mm  ').format(now);
+    return DateFormat('EEEE, dd MMMM yyyy  ').format(now);
   }
 
   List<dynamic> listJson = [];
@@ -146,7 +146,7 @@ class _DashboardViewState extends State<DashboardView> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          getFormattedDate(),
+          listSholatHarian?.jadwal.tanggal ?? "",
           style: const TextStyle(
               color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500),
         ),
