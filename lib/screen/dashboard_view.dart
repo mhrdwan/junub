@@ -30,7 +30,6 @@ class _DashboardViewState extends State<DashboardView> {
   bool isLoading = true;
   void fetchSholatData() async {
     var data = await getSholat();
-    print(data);
     setState(() {
       listSholatHarian = ListSholatHarian.fromJson(data);
       isLoading = false;
@@ -57,12 +56,8 @@ class _DashboardViewState extends State<DashboardView> {
   //   }
   // }
 
-  int _selectedIndex = 0;
-
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    setState(() {});
     // Handle navigation based on index
     switch (index) {
       case 0:
@@ -131,7 +126,7 @@ class _DashboardViewState extends State<DashboardView> {
               width: MediaQuery.of(context).size.width / 1.2,
               height: MediaQuery.of(context).size.height / 8,
               child: Padding(
-                padding: EdgeInsets.only(left: 15, right: 15),
+                padding: const EdgeInsets.only(left: 15, right: 15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -148,10 +143,11 @@ class _DashboardViewState extends State<DashboardView> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 16,
                     ),
-                    const Column(
+                    Column(
                       mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Sholat 5 Waktu"),
+                        Text(i == 0 ? "Sholat 5 Waktu" : "Misi yang lainnya"),
                         Text("Progres"),
                         Text("1/5")
                       ],
@@ -216,14 +212,14 @@ class _DashboardViewState extends State<DashboardView> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 const Text(
-                                  "Dzuhur",
+                                  "Subuh",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  listSholatHarian?.jadwal.dzuhur ?? "",
+                                  listSholatHarian?.jadwal.subuh ?? "",
                                   style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 30,
@@ -281,7 +277,7 @@ class _DashboardViewState extends State<DashboardView> {
                                       color: Colors.black.withOpacity(0.2),
                                       spreadRadius: 1,
                                       blurRadius: 2,
-                                      offset: Offset(0, 2),
+                                      offset: const Offset(0, 2),
                                     ),
                                   ],
                                 ),
@@ -312,14 +308,20 @@ class _DashboardViewState extends State<DashboardView> {
                                                             'assets/icons/hadist.jpg',
                                                             scale: 0.1,
                                                             fit: BoxFit.cover)
-                                                        : const Icon(
-                                                            Icons
-                                                                .mosque, // Contoh menggunakan ikon bintang
-                                                            color: Colors
-                                                                .white, // Warna ikon
-                                                            size:
-                                                                24, // Ukuran ikon
-                                                          )))))),
+                                                        : (index == 5)
+                                                            ? Image.asset(
+                                                                'assets/icons/masjid.png',
+                                                                scale: 0.1,
+                                                                fit: BoxFit
+                                                                    .cover)
+                                                            : const Icon(
+                                                                Icons
+                                                                    .mosque, // Contoh menggunakan ikon bintang
+                                                                color: Colors
+                                                                    .white, // Warna ikon
+                                                                size:
+                                                                    24, // Ukuran ikon
+                                                              )))))),
                               ),
                               const SizedBox(height: 8),
                               Text(index == 0
@@ -332,7 +334,9 @@ class _DashboardViewState extends State<DashboardView> {
                                               ? "Waktu Sholat"
                                               : (index == 4
                                                   ? "Asmaul"
-                                                  : "Menu ${index + 1}"))))),
+                                                  : (index == 5
+                                                      ? "Masjid"
+                                                      : "Menu ${index + 1}")))))),
                             ],
                           ),
                         );
