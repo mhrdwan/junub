@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:junub/api/JadwalSholat/getJadwalSholatHarian.dart';
 import 'package:junub/models/JadwalSholat/ListSemuaKota/ListSholatHarian.dart';
@@ -109,24 +111,55 @@ class _DashboardViewState extends State<DashboardView> {
 
   List<Widget> createContainerList(BuildContext context) {
     List<Widget> containerList = [];
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 5; i++) {
       containerList.add(
         Padding(
           padding: const EdgeInsets.only(top: 15),
           child: Center(
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.green[600],
-                borderRadius: BorderRadius.circular(20),
-              ),
+                  color: Colors.white60,
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: Colors.black)),
               width: MediaQuery.of(context).size.width / 1.2,
               height: MediaQuery.of(context).size.height / 8,
-              child: const Padding(
+              child: Padding(
                 padding: EdgeInsets.only(left: 15, right: 15),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    // Text('data'),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(
+                          15), // Adjust the radius as needed
+                      child: Image.asset(
+                        'assets/icons/sejadah.jpg',
+                        fit: BoxFit.cover,
+                        height: 50, // Adjust the height as needed
+                        width: 50, // Adjust the width as needed
+                      ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 16,
+                    ),
+                    const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Sholat 5 Waktu"),
+                        Text("Progres"),
+                        Text("1/5")
+                      ],
+                    ),
+                    const SizedBox(
+                      width: 50,
+                    ),
+                    const Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.arrow_circle_right),
+                        ],
+                      ),
+                    )
                     // Text('data'),
                     // Text('data'),
                   ],
@@ -143,21 +176,23 @@ class _DashboardViewState extends State<DashboardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          listSholatHarian?.jadwal.tanggal ?? "",
-          style: const TextStyle(
-              color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500),
-        ),
-      ),
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   title: Text(
+      //     listSholatHarian?.jadwal.tanggal ?? "",
+      //     style: const TextStyle(
+      //         color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500),
+      //   ),
+      // ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 20),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 15,
+                  ),
                   Center(
                     child: Container(
                       decoration: BoxDecoration(
@@ -214,7 +249,7 @@ class _DashboardViewState extends State<DashboardView> {
                     ),
                   ),
 
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 10),
                   // Grid view of menu items
                   Padding(
                     padding: const EdgeInsets.only(left: 20, right: 20),
