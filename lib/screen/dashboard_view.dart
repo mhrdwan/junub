@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:junub/constants.dart';
 import 'package:junub/screen/Al-Quran/menu1.dart';
 import 'package:junub/screen/menu2.dart';
+import 'package:junub/screen/Doa/main.dart';
+import 'package:junub/screen/Wudu/main.dart';
 
 class DashboardView extends StatefulWidget {
   const DashboardView({Key? key}) : super(key: key);
@@ -46,7 +48,7 @@ class _DashboardViewState extends State<DashboardView> {
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const Menu2()),
+          MaterialPageRoute(builder: (context) => const MainDoa()),
         );
         break;
       default:
