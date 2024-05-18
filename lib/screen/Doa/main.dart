@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:junub/widget/header.dart';
-import 'package:junub/widget/doa_list.dart';
+import 'package:junub/widget/doa_list_categories.dart';
 
 class MainDoa extends StatefulWidget {
   const MainDoa({Key? key}) : super(key: key);
@@ -35,24 +35,24 @@ class _MainDoaState extends State<MainDoa> with SingleTickerProviderStateMixin {
             child: TabBarView(
               controller: _tabController,
               children: [
-                SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      // Search form
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.search),
-                            labelText: 'Cari Doa',
-                            border: OutlineInputBorder(),
-                          ),
+                Column(
+                  children: [
+                    // Search form
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.search),
+                          labelText: 'Cari Doa',
+                          border: OutlineInputBorder(),
                         ),
                       ),
-                      // DoaList
-                      Center(child: Text('Category content')),
-                    ],
-                  ),
+                    ),
+                    // Expanded untuk mengisi ruang yang tersisa
+                    Expanded(
+                      child: DoaListCategories(),
+                    ),
+                  ],
                 ), // Categories content
                 Center(child: Text('MyDua content')), // MyDua content
               ],
