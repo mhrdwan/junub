@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:junub/models/Doa/doa_category.dart';
+import 'package:junub/widget/Card/card_featured.dart';
 
 class DoaListCategories extends StatefulWidget {
   const DoaListCategories({Key? key}) : super(key: key);
@@ -30,19 +31,53 @@ class _DoaListCategoriesState extends State<DoaListCategories> {
 
   @override
   Widget build(BuildContext context) {
-    return _categories.isEmpty
-        ? Center(child: CircularProgressIndicator())
-        : ListView.builder(
-            itemCount: _categories.length,
-            itemBuilder: (context, index) {
-              final category = _categories[index];
-              return ListTile(
-                leading:
-                    Icon(Icons.category), // Placeholder untuk ikon kategori
-                title: Text(category.title),
-                trailing: Text('${category.count}'),
-              );
-            },
-          );
+    final double screenWidth = MediaQuery.of(context).size.width;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('List of Prayer Categories'),
+      ),
+      body: _categories.isEmpty
+          ? Center(child: CircularProgressIndicator())
+          : GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: _getCrossAxisCount(screenWidth),
+                childAspectRatio: _getChildAspectRatio(screenWidth),
+              ),
+              itemCount: _categories.length,
+              itemBuilder: (context, index) {
+                final category = _categories[index];
+                return CardFeatured(
+                  title: category.title,
+                  description: 'Total: ${category.count} doa',
+                  actionFunction: () {},
+                  widthFactor:
+                      1.0, // Faktor lebar diatur ke 1.0 karena GridView akan menangani lebar
+                );
+              },
+            ),
+    );
+  }
+
+  int _getCrossAxisCount(double screenWidth) {
+    if (screenWidth < 600) {
+      return 2; // Untuk layar yang lebih kecil, gunakan dua kolom
+    } else if (screenWidth < 900) {
+      return 3; // Untuk layar yang sedang, gunakan tiga kolom
+    } else {
+      return 4; // Untuk layar yang lebih besar, gunakan empat kolom
+    }
+  }
+
+  double _getChildAspectRatio(double screenWidth) {
+    // Rasio aspek child bisa disesuaikan sesuai kebutuhan.
+    // Misalnya, jika tinggi card tetap, kita bisa mengatur rasio aspek berdasarkan lebar.
+    if (screenWidth < 600) {
+      return (screenWidth / 2) / 200; // Dua kolom
+    } else if (screenWidth < 900) {
+      return (screenWidth / 3) / 200; // Tiga kolom
+    } else {
+      return (screenWidth / 4) / 200; // Empat kolom
+    }
   }
 }
